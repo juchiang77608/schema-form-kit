@@ -1,0 +1,287 @@
+/*
+ * schema-form-kit default theme.
+ * Every visual decision is a CSS variable, so a theme is just a set of overrides:
+ *   .my-theme { --sfk-color-primary: #0f766e; --sfk-radius: 2px; }
+ */
+.sfk-form {
+  --sfk-font: inherit;
+  --sfk-color-text: #1f2328;
+  --sfk-color-muted: #59636e;
+  --sfk-color-border: #d1d9e0;
+  --sfk-color-surface: #ffffff;
+  --sfk-color-subtle: #f6f8fa;
+  --sfk-color-primary: #4f46e5;
+  --sfk-color-primary-contrast: #ffffff;
+  --sfk-color-danger: #cf222e;
+  --sfk-color-focus: color-mix(in srgb, var(--sfk-color-primary) 35%, transparent);
+  --sfk-radius: 8px;
+  --sfk-gap: 16px;
+  --sfk-input-height: 40px;
+
+  font-family: var(--sfk-font);
+  color: var(--sfk-color-text);
+  display: flex;
+  flex-direction: column;
+  gap: calc(var(--sfk-gap) * 1.5);
+}
+
+.sfk-title {
+  margin: 0 0 4px;
+  font-size: 1.375rem;
+}
+
+.sfk-form-description,
+.sfk-description,
+.sfk-step-description {
+  margin: 0;
+  color: var(--sfk-color-muted);
+  font-size: 0.875rem;
+}
+
+.sfk-grid {
+  display: grid;
+  grid-template-columns: repeat(12, minmax(0, 1fr));
+  gap: var(--sfk-gap);
+}
+
+@media (max-width: 640px) {
+  .sfk-grid > .sfk-field {
+    grid-column: span 12 !important;
+  }
+}
+
+.sfk-field {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  min-width: 0;
+}
+
+.sfk-label {
+  font-weight: 600;
+  font-size: 0.9375rem;
+}
+
+.sfk-required {
+  color: var(--sfk-color-danger);
+  margin-left: 2px;
+}
+
+.sfk-input {
+  box-sizing: border-box;
+  width: 100%;
+  min-height: var(--sfk-input-height);
+  padding: 8px 12px;
+  font: inherit;
+  color: inherit;
+  background: var(--sfk-color-surface);
+  border: 1px solid var(--sfk-color-border);
+  border-radius: var(--sfk-radius);
+}
+
+.sfk-textarea {
+  resize: vertical;
+}
+
+.sfk-input:focus-visible,
+.sfk-switch:focus-visible,
+.sfk-btn:focus-visible,
+.sfk-step__button:focus-visible,
+.sfk-choice input:focus-visible {
+  outline: 3px solid var(--sfk-color-focus);
+  outline-offset: 1px;
+}
+
+.sfk-field--invalid .sfk-input {
+  border-color: var(--sfk-color-danger);
+}
+
+.sfk-errors {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  color: var(--sfk-color-danger);
+  font-size: 0.8125rem;
+}
+
+.sfk-choices {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px 20px;
+}
+
+.sfk-choice {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  cursor: pointer;
+}
+
+.sfk-choice input {
+  accent-color: var(--sfk-color-primary);
+  width: 16px;
+  height: 16px;
+}
+
+.sfk-switch {
+  position: relative;
+  width: 44px;
+  height: 24px;
+  padding: 0;
+  border: none;
+  border-radius: 999px;
+  background: var(--sfk-color-border);
+  cursor: pointer;
+  transition: background 0.15s ease;
+}
+
+.sfk-switch__thumb {
+  position: absolute;
+  top: 3px;
+  left: 3px;
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  background: #fff;
+  transition: transform 0.15s ease;
+}
+
+.sfk-switch--on {
+  background: var(--sfk-color-primary);
+}
+
+.sfk-switch--on .sfk-switch__thumb {
+  transform: translateX(20px);
+}
+
+.sfk-array {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  align-items: flex-start;
+}
+
+.sfk-array__empty {
+  margin: 0;
+  color: var(--sfk-color-muted);
+  font-size: 0.875rem;
+}
+
+.sfk-array__item {
+  align-self: stretch;
+  margin: 0;
+  padding: var(--sfk-gap);
+  border: 1px solid var(--sfk-color-border);
+  border-radius: var(--sfk-radius);
+  background: var(--sfk-color-subtle);
+}
+
+.sfk-array__legend {
+  padding: 0 6px;
+  font-weight: 600;
+  font-size: 0.875rem;
+}
+
+.sfk-array__actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 8px;
+  margin-top: 12px;
+}
+
+.sfk-btn {
+  min-height: 36px;
+  padding: 6px 16px;
+  font: inherit;
+  font-weight: 600;
+  border-radius: var(--sfk-radius);
+  border: 1px solid transparent;
+  cursor: pointer;
+}
+
+.sfk-btn:disabled {
+  opacity: 0.45;
+  cursor: not-allowed;
+}
+
+.sfk-btn--primary {
+  background: var(--sfk-color-primary);
+  color: var(--sfk-color-primary-contrast);
+}
+
+.sfk-btn--secondary {
+  background: var(--sfk-color-surface);
+  border-color: var(--sfk-color-border);
+  color: var(--sfk-color-text);
+}
+
+.sfk-btn--ghost {
+  background: transparent;
+  color: var(--sfk-color-muted);
+  padding-inline: 10px;
+}
+
+.sfk-btn--danger {
+  background: transparent;
+  color: var(--sfk-color-danger);
+  padding-inline: 10px;
+}
+
+.sfk-footer {
+  display: flex;
+  justify-content: flex-end;
+  gap: 12px;
+}
+
+.sfk-steps ol {
+  display: flex;
+  gap: 8px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  counter-reset: step;
+}
+
+.sfk-step {
+  flex: 1;
+}
+
+.sfk-step__button {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  width: 100%;
+  padding: 8px 0;
+  font: inherit;
+  color: var(--sfk-color-muted);
+  background: none;
+  border: none;
+  border-top: 3px solid var(--sfk-color-border);
+  cursor: pointer;
+  text-align: left;
+}
+
+.sfk-step__index {
+  display: inline-grid;
+  place-items: center;
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  font-size: 0.8125rem;
+  font-weight: 700;
+  background: var(--sfk-color-subtle);
+  border: 1px solid var(--sfk-color-border);
+}
+
+.sfk-step--active .sfk-step__button,
+.sfk-step--done .sfk-step__button {
+  color: var(--sfk-color-text);
+  border-top-color: var(--sfk-color-primary);
+}
+
+.sfk-step--active .sfk-step__index,
+.sfk-step--done .sfk-step__index {
+  background: var(--sfk-color-primary);
+  border-color: var(--sfk-color-primary);
+  color: var(--sfk-color-primary-contrast);
+}

@@ -1,0 +1,58 @@
+name: Deploy playground
+
+# Deploys apps/playground to Cloudflare Pages (project: schema-form-kit-playground).
+# Required repository secrets: CLOUDFLARE_API_TOKEN (Pages: Edit), CLOUDFLARE_ACCOUNT_ID.
+# Custom domain forms.janicechiang.dev is attached to the Pages project once, in Cloudflare.
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'apps/playground/**'
+      - 'packages/**'
+      - '.github/workflows/deploy-playground.yml'
+  pull_request:
+    paths:
+      - 'apps/playground/**'
+      - 'packages/**'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  deployments: write
+  pull-requests: write
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    # Forks do not get secrets; skip instead of failing.
+    if: github.event_name != 'pull_request' || github.event.pull_request.head.repo.full_name == github.repository
+    steps:
+      - uses: actions/checkout@v4
+      - uses: pnpm/action-setup@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version-file: .nvmrc
+          cache: pnpm
+      - run: pnpm install --frozen-lockfile
+      - run: pnpm --filter @schema-form-kit/playground build
+      - name: Deploy to Cloudflare Pages
+        id: deploy
+        uses: cloudflare/wrangler-action@v3
+        with:
+          apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+          command: >-
+            pages deploy apps/playground/dist
+            --project-name=schema-form-kit-playground
+            --branch=${{ github.head_ref || github.ref_name }}
+      - name: Comment preview URL
+        if: github.event_name == 'pull_request'
+        uses: actions/github-script@v7
+        with:
+          script: |
+            await github.rest.issues.createComment({
+              ...context.repo,
+              issue_number: context.issue.number,
+              body: `Playground preview: ${{ steps.deploy.outputs.deployment-url }}`,
+            });

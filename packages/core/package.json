@@ -1,0 +1,33 @@
+{
+  "name": "@schema-form-kit/core",
+  "version": "0.1.0",
+  "description": "Framework-agnostic JSON form schema engine: conditions, validation, i18n.",
+  "license": "MIT",
+  "author": "Janice Chiang",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/juchiang77608/schema-form-kit.git",
+    "directory": "packages/core"
+  },
+  "keywords": ["form", "json-schema", "form-builder", "validation"],
+  "type": "module",
+  "sideEffects": false,
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js"
+    }
+  },
+  "files": ["dist"],
+  "scripts": {
+    "build": "vite build && tsc -p tsconfig.build.json",
+    "typecheck": "tsc --noEmit -p tsconfig.json"
+  },
+  "devDependencies": {
+    "typescript": "~6.0.2",
+    "vite": "^8.0.12",
+    "vitest": "^4.0.0"
+  }
+}
