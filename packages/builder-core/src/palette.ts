@@ -1,4 +1,10 @@
-import type { FieldSchema, FieldType, I18nText, Option, ValidationRule } from '@schema-form-kit/core';
+import type {
+  FieldSchema,
+  FieldType,
+  I18nText,
+  Option,
+  ValidationRule,
+} from '@schema-form-kit/core';
 
 export interface PaletteItem {
   type: FieldType;

@@ -50,7 +50,12 @@ describe('evaluateCondition', () => {
     const cond: Condition = {
       all: [
         { field: 'role', op: 'eq', value: 'student' },
-        { any: [{ field: 'age', op: 'lt', value: 18 }, { field: 'tags', op: 'includes', value: 'ts' }] },
+        {
+          any: [
+            { field: 'age', op: 'lt', value: 18 },
+            { field: 'tags', op: 'includes', value: 'ts' },
+          ],
+        },
         { not: { field: 'note', op: 'notEmpty' } },
       ],
     };

@@ -9,9 +9,16 @@
     "url": "https://github.com/juchiang77608/schema-form-kit.git",
     "directory": "packages/renderer"
   },
-  "keywords": ["vue", "form", "json-schema", "form-renderer"],
+  "keywords": [
+    "vue",
+    "form",
+    "json-schema",
+    "form-renderer"
+  ],
   "type": "module",
-  "sideEffects": ["**/*.css"],
+  "sideEffects": [
+    "**/*.css"
+  ],
   "main": "./dist/index.js",
   "types": "./dist/index.d.ts",
   "exports": {
@@ -21,7 +28,9 @@
     },
     "./styles.css": "./dist/styles.css"
   },
-  "files": ["dist"],
+  "files": [
+    "dist"
+  ],
   "scripts": {
     "build": "vite build && vue-tsc -p tsconfig.build.json && node -e \"require('node:fs').copyFileSync('src/styles.css','dist/styles.css')\"",
     "typecheck": "vue-tsc --noEmit -p tsconfig.json"

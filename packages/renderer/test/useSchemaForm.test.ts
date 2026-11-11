@@ -9,7 +9,13 @@ const schema: FormSchema = {
   title: 'Trip',
   fields: [
     { name: 'city', type: 'text', label: 'City', required: true },
-    { name: 'nights', type: 'number', label: 'Nights', required: true, validations: [{ type: 'min', value: 1 }] },
+    {
+      name: 'nights',
+      type: 'number',
+      label: 'Nights',
+      required: true,
+      validations: [{ type: 'min', value: 1 }],
+    },
     { name: 'notes', type: 'textarea', label: 'Notes' },
   ],
   steps: [
@@ -50,7 +56,11 @@ describe('useSchemaForm', () => {
   });
 
   it('validate jumps to the first step with errors', () => {
-    const form = useSchemaForm({ schema, locale: 'en', initialValues: { city: 'Tainan', nights: 0 } });
+    const form = useSchemaForm({
+      schema,
+      locale: 'en',
+      initialValues: { city: 'Tainan', nights: 0 },
+    });
     form.goTo(1);
     expect(form.validate()).toBe(false);
     expect(form.stepIndex.value).toBe(1);

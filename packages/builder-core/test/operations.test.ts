@@ -27,7 +27,12 @@ const base = (): FormSchema => ({
   title: 'Demo',
   fields: [
     { name: 'role', type: 'radio', label: 'Role', options: [{ label: 'A', value: 'a' }] },
-    { name: 'note', type: 'text', label: 'Note', visibleWhen: { field: 'role', op: 'eq', value: 'a' } },
+    {
+      name: 'note',
+      type: 'text',
+      label: 'Note',
+      visibleWhen: { field: 'role', op: 'eq', value: 'a' },
+    },
     {
       name: 'jobs',
       type: 'array',
@@ -39,7 +44,12 @@ const base = (): FormSchema => ({
           name: 'end',
           type: 'date',
           label: 'End',
-          required: { all: [{ field: 'current', op: 'eq', value: false }, { field: 'role', op: 'eq', value: 'a' }] },
+          required: {
+            all: [
+              { field: 'current', op: 'eq', value: false },
+              { field: 'role', op: 'eq', value: 'a' },
+            ],
+          },
         },
       ],
     },
@@ -108,14 +118,19 @@ describe('removeField / duplicateField / moveField', () => {
     expect(path).toBe('note_copy');
     expect(names(schema)).toEqual(['role', 'note', 'note_copy', 'jobs']);
     expect(schema.steps?.[0]?.fields).toEqual(['role', 'note', 'note_copy', 'jobs']);
-    expect(getField(schema, 'note_copy')?.visibleWhen).toEqual(getField(schema, 'note')?.visibleWhen);
+    expect(getField(schema, 'note_copy')?.visibleWhen).toEqual(
+      getField(schema, 'note')?.visibleWhen,
+    );
   });
 
   it('moves among siblings', () => {
     expect(names(moveField(base(), 'jobs', 0))).toEqual(['jobs', 'role', 'note']);
     const nested = moveField(base(), 'jobs.end', 0);
     const jobs = getField(nested, 'jobs');
-    expect(jobs?.type === 'array' ? jobs.fields.map((f) => f.name) : []).toEqual(['end', 'current']);
+    expect(jobs?.type === 'array' ? jobs.fields.map((f) => f.name) : []).toEqual([
+      'end',
+      'current',
+    ]);
   });
 
   it('moves a field between steps', () => {
@@ -176,15 +191,29 @@ describe('renameField', () => {
           label: 'Items',
           fields: [
             { name: 'status', type: 'text', label: 'Item status' },
-            { name: 'why', type: 'text', label: 'Why', visibleWhen: { field: 'status', op: 'eq', value: 'x' } },
+            {
+              name: 'why',
+              type: 'text',
+              label: 'Why',
+              visibleWhen: { field: 'status', op: 'eq', value: 'x' },
+            },
           ],
         },
-        { name: 'outer', type: 'text', label: 'Outer', visibleWhen: { field: 'status', op: 'notEmpty' } },
+        {
+          name: 'outer',
+          type: 'text',
+          label: 'Outer',
+          visibleWhen: { field: 'status', op: 'notEmpty' },
+        },
       ],
     };
     const { schema } = renameField(shadow, 'status', 'state');
     expect(getField(schema, 'outer')?.visibleWhen).toEqual({ field: 'state', op: 'notEmpty' });
-    expect(getField(schema, 'items.why')?.visibleWhen).toEqual({ field: 'status', op: 'eq', value: 'x' });
+    expect(getField(schema, 'items.why')?.visibleWhen).toEqual({
+      field: 'status',
+      op: 'eq',
+      value: 'x',
+    });
   });
 
   it('updates steps and validates the new name', () => {
@@ -203,7 +232,9 @@ describe('findReferences', () => {
       { from: 'jobs', property: 'visibleWhen' },
       { from: 'jobs.end', property: 'required' },
     ]);
-    expect(findReferences(base(), 'jobs.current')).toEqual([{ from: 'jobs.end', property: 'required' }]);
+    expect(findReferences(base(), 'jobs.current')).toEqual([
+      { from: 'jobs.end', property: 'required' },
+    ]);
     expect(findReferences(base(), 'note')).toEqual([]);
   });
 });
@@ -244,7 +275,9 @@ describe('changeFieldType', () => {
 describe('steps', () => {
   it('enables steps with every field in step 1 and disables them in step order', () => {
     let schema = enableSteps(base());
-    expect(schema.steps).toEqual([{ id: 'step1', title: { 'zh-TW': '步驟 1', en: 'Step 1' }, fields: ['role', 'note', 'jobs'] }]);
+    expect(schema.steps).toEqual([
+      { id: 'step1', title: { 'zh-TW': '步驟 1', en: 'Step 1' }, fields: ['role', 'note', 'jobs'] },
+    ]);
     schema = addStep(schema).schema;
     schema = moveFieldToStep(schema, 'role', 'step', 0);
     schema = disableSteps(schema);
@@ -266,7 +299,10 @@ describe('steps', () => {
     let schema = addStep(enableSteps(base()), 'Second').schema;
     schema = updateStep(schema, 'step', { title: 'Details' });
     schema = moveStep(schema, 'step', 0);
-    expect(schema.steps?.map((s) => s.title)).toEqual(['Details', { 'zh-TW': '步驟 1', en: 'Step 1' }]);
+    expect(schema.steps?.map((s) => s.title)).toEqual([
+      'Details',
+      { 'zh-TW': '步驟 1', en: 'Step 1' },
+    ]);
     expect(checkSchema(schema)).toEqual([]);
   });
 });

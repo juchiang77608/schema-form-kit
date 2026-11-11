@@ -16,7 +16,12 @@ describe('checkSchema', () => {
           visibleWhen: { field: 'kind', op: 'eq', value: 'a' },
           fields: [
             { name: 'done', type: 'switch', label: 'Done' },
-            { name: 'date', type: 'date', label: 'Date', visibleWhen: { field: 'done', op: 'eq', value: true } },
+            {
+              name: 'date',
+              type: 'date',
+              label: 'Date',
+              visibleWhen: { field: 'done', op: 'eq', value: true },
+            },
           ],
         },
       ],

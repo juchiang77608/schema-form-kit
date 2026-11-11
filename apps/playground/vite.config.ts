@@ -10,7 +10,10 @@ export default defineConfig({
     // Use package sources so the playground never needs a prior library build.
     alias: [
       { find: '@schema-form-kit/core', replacement: src('../../packages/core/src/index.ts') },
-      { find: '@schema-form-kit/vue/styles.css', replacement: src('../../packages/renderer/src/styles.css') },
+      {
+        find: '@schema-form-kit/vue/styles.css',
+        replacement: src('../../packages/renderer/src/styles.css'),
+      },
       { find: '@schema-form-kit/vue', replacement: src('../../packages/renderer/src/index.ts') },
     ],
   },

@@ -10,12 +10,12 @@ repeatable groups and i18n, with a framework-agnostic core.
 
 ## Packages
 
-| Package | Description |
-|---|---|
-| [`@schema-form-kit/core`](packages/core) | Schema types, condition engine, validation, i18n, schema checks. No runtime dependencies. |
-| [`@schema-form-kit/vue`](packages/renderer) | `<SchemaForm>` component, field components and the headless `useSchemaForm` composable. |
+| Package                                                  | Description                                                                                                                          |
+| -------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------ |
+| [`@schema-form-kit/core`](packages/core)                 | Schema types, condition engine, validation, i18n, schema checks. No runtime dependencies.                                            |
+| [`@schema-form-kit/vue`](packages/renderer)              | `<SchemaForm>` component, field components and the headless `useSchemaForm` composable.                                              |
 | [`@schema-form-kit/builder-core`](packages/builder-core) | Editing operations for the visual builder: add, move, rename (with reference updates), change type, steps, undo/redo, import/export. |
-| [`playground`](apps/playground) | Live editor: edit the JSON on the left, see the form on the right. |
+| [`playground`](apps/playground)                          | Live editor: edit the JSON on the left, see the form on the right.                                                                   |
 
 ## Quick start
 

@@ -5,9 +5,9 @@
 
 ## Context
 
-A form library has two kinds of logic: deciding *what* the form means (which
+A form library has two kinds of logic: deciding _what_ the form means (which
 fields are visible or required, whether values are valid, which step is
-complete) and deciding *how* it looks (components, events, styling).
+complete) and deciding _how_ it looks (components, events, styling).
 
 If both live in Vue components, the rules can only be tested by mounting
 components, and supporting another framework later means rewriting them.

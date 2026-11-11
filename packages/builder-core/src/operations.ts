@@ -1,4 +1,10 @@
-import type { ArrayField, FieldSchema, FieldType, FormSchema, StepSchema } from '@schema-form-kit/core';
+import type {
+  ArrayField,
+  FieldSchema,
+  FieldType,
+  FormSchema,
+  StepSchema,
+} from '@schema-form-kit/core';
 import { CHOICE_TYPES, RULES_BY_TYPE, createField, defaultOptions, uniqueName } from './palette';
 import { renameReferences } from './references';
 import {
@@ -47,7 +53,8 @@ function placeInStep(
   afterName?: string,
 ): StepSchema[] | undefined {
   if (!steps || steps.length === 0) return steps;
-  const targetId = stepId ?? (afterName ? steps.find((s) => s.fields.includes(afterName))?.id : undefined);
+  const targetId =
+    stepId ?? (afterName ? steps.find((s) => s.fields.includes(afterName))?.id : undefined);
   const target = steps.find((s) => s.id === targetId) ?? steps[steps.length - 1]!;
   return steps.map((step) => {
     if (step.id !== target.id) return step;
@@ -62,7 +69,11 @@ function removeFromSteps(steps: StepSchema[] | undefined, name: string): StepSch
   return steps?.map((step) => ({ ...step, fields: step.fields.filter((f) => f !== name) }));
 }
 
-function renameInSteps(steps: StepSchema[] | undefined, from: string, to: string): StepSchema[] | undefined {
+function renameInSteps(
+  steps: StepSchema[] | undefined,
+  from: string,
+  to: string,
+): StepSchema[] | undefined {
   return steps?.map((step) => ({ ...step, fields: step.fields.map((f) => (f === from ? to : f)) }));
 }
 
@@ -138,14 +149,18 @@ export function duplicateField(schema: FormSchema, path: FieldPath): AddFieldRes
   const index = siblings.findIndex((f) => f.name === original.name);
   const copy: FieldSchema = {
     ...structuredClone(original),
-    name: uniqueName(`${original.name}_copy`, siblings.map((f) => f.name)),
+    name: uniqueName(
+      `${original.name}_copy`,
+      siblings.map((f) => f.name),
+    ),
   };
   const next = replaceFieldsAt(schema, parent, (fields) => {
     const list = [...fields];
     list.splice(index + 1, 0, copy);
     return list;
   });
-  const steps = parent === '' ? placeInStep(next.steps, copy.name, undefined, original.name) : next.steps;
+  const steps =
+    parent === '' ? placeInStep(next.steps, copy.name, undefined, original.name) : next.steps;
   return { schema: withSteps(next, steps), path: childPath(parent, copy.name) };
 }
 
@@ -167,7 +182,8 @@ export function moveFieldToStep(
   index?: number,
 ): FormSchema {
   requireField(schema, name);
-  if (!schema.steps?.some((s) => s.id === stepId)) throw new BuilderError(`Step "${stepId}" does not exist`);
+  if (!schema.steps?.some((s) => s.id === stepId))
+    throw new BuilderError(`Step "${stepId}" does not exist`);
   const steps = schema.steps.map((step) => {
     const fields = step.fields.filter((f) => f !== name);
     if (step.id === stepId) fields.splice(clampIndex(index, fields.length), 0, name);
@@ -203,7 +219,9 @@ export function renameField(schema: FormSchema, path: FieldPath, newName: string
   const parent = parentPath(path);
   if (newName === field.name) return { schema, path };
   if (!NAME_RE.test(newName)) {
-    throw new BuilderError(`"${newName}" is not a valid name (letters, digits and _; not starting with a digit)`);
+    throw new BuilderError(
+      `"${newName}" is not a valid name (letters, digits and _; not starting with a digit)`,
+    );
   }
   if (fieldsAt(schema, parent)!.some((f) => f.name === newName)) {
     throw new BuilderError(`A field named "${newName}" already exists here`);
@@ -243,7 +261,8 @@ export function changeFieldType(schema: FormSchema, path: FieldPath, type: Field
   else delete common.validations;
 
   if (CHOICE_TYPES.has(type)) {
-    common.options = 'options' in field && field.options.length > 0 ? field.options : defaultOptions();
+    common.options =
+      'options' in field && field.options.length > 0 ? field.options : defaultOptions();
   }
   if (type === 'array') {
     common.fields = (createField('array', []) as ArrayField).fields;
@@ -265,7 +284,13 @@ export function enableSteps(schema: FormSchema): FormSchema {
   if (schema.steps && schema.steps.length > 0) return schema;
   return {
     ...schema,
-    steps: [{ id: 'step1', title: { 'zh-TW': '步驟 1', en: 'Step 1' }, fields: schema.fields.map((f) => f.name) }],
+    steps: [
+      {
+        id: 'step1',
+        title: { 'zh-TW': '步驟 1', en: 'Step 1' },
+        fields: schema.fields.map((f) => f.name),
+      },
+    ],
   };
 }
 
@@ -281,12 +306,22 @@ export function disableSteps(schema: FormSchema): FormSchema {
   return withSteps({ ...schema, fields: ordered }, undefined);
 }
 
-export function addStep(schema: FormSchema, title?: StepSchema['title']): { schema: FormSchema; stepId: string } {
+export function addStep(
+  schema: FormSchema,
+  title?: StepSchema['title'],
+): { schema: FormSchema; stepId: string } {
   const base = enableSteps(schema);
   const steps = base.steps!;
-  const id = uniqueName('step', steps.map((s) => s.id));
+  const id = uniqueName(
+    'step',
+    steps.map((s) => s.id),
+  );
   const n = steps.length + 1;
-  const step: StepSchema = { id, title: title ?? { 'zh-TW': `步驟 ${n}`, en: `Step ${n}` }, fields: [] };
+  const step: StepSchema = {
+    id,
+    title: title ?? { 'zh-TW': `步驟 ${n}`, en: `Step ${n}` },
+    fields: [],
+  };
   return { schema: { ...base, steps: [...steps, step] }, stepId: id };
 }
 
@@ -295,7 +330,8 @@ export function updateStep(
   stepId: string,
   patch: Partial<Pick<StepSchema, 'title' | 'description'>>,
 ): FormSchema {
-  if (!schema.steps?.some((s) => s.id === stepId)) throw new BuilderError(`Step "${stepId}" does not exist`);
+  if (!schema.steps?.some((s) => s.id === stepId))
+    throw new BuilderError(`Step "${stepId}" does not exist`);
   return { ...schema, steps: schema.steps.map((s) => (s.id === stepId ? { ...s, ...patch } : s)) };
 }
 
@@ -312,7 +348,14 @@ export function removeStep(schema: FormSchema, stepId: string): FormSchema {
   const removed = steps[index]!;
   const heirIndex = index > 0 ? index - 1 : 1;
   const next = steps
-    .map((s, i) => (i === heirIndex ? { ...s, fields: index > 0 ? [...s.fields, ...removed.fields] : [...removed.fields, ...s.fields] } : s))
+    .map((s, i) =>
+      i === heirIndex
+        ? {
+            ...s,
+            fields: index > 0 ? [...s.fields, ...removed.fields] : [...removed.fields, ...s.fields],
+          }
+        : s,
+    )
     .filter((s) => s.id !== stepId);
   return { ...schema, steps: next };
 }

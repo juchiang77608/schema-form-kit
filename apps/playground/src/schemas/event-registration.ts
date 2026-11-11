@@ -42,7 +42,10 @@ export const eventRegistration: FormSchema = {
       name: 'school',
       type: 'text',
       label: { 'zh-TW': '學校名稱', en: 'School' },
-      description: { 'zh-TW': '學生票需於報到時出示學生證。', en: 'Bring your student ID at check-in.' },
+      description: {
+        'zh-TW': '學生票需於報到時出示學生證。',
+        en: 'Bring your student ID at check-in.',
+      },
       required: true,
       visibleWhen: { field: 'attendeeType', op: 'eq', value: 'student' },
     },
@@ -62,7 +65,10 @@ export const eventRegistration: FormSchema = {
         { label: { 'zh-TW': '前端架構', en: 'Frontend architecture' }, value: 'frontend' },
         { label: { 'zh-TW': '雲端與 DevOps', en: 'Cloud & DevOps' }, value: 'cloud' },
         { label: { 'zh-TW': 'AI 應用', en: 'Applied AI' }, value: 'ai' },
-        { label: { 'zh-TW': '工作坊（需自備筆電）', en: 'Workshop (bring a laptop)' }, value: 'workshop' },
+        {
+          label: { 'zh-TW': '工作坊（需自備筆電）', en: 'Workshop (bring a laptop)' },
+          value: 'workshop',
+        },
       ],
       validations: [{ type: 'maxItems', value: 3 }],
     },

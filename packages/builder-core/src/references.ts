@@ -1,4 +1,9 @@
-import { conditionDependencies, type Condition, type FieldSchema, type FormSchema } from '@schema-form-kit/core';
+import {
+  conditionDependencies,
+  type Condition,
+  type FieldSchema,
+  type FormSchema,
+} from '@schema-form-kit/core';
 import { childPath, parentPath, walkFields, type FieldPath } from './tree';
 
 export interface FieldReference {
@@ -37,7 +42,9 @@ export function findReferences(schema: FormSchema, target: FieldPath): FieldRefe
     const scope = parentPath(path);
     const check = (cond: Condition | undefined, property: FieldReference['property']) => {
       if (!cond) return;
-      const hits = conditionDependencies(cond).some((dep) => resolveTarget(schema, scope, dep) === target);
+      const hits = conditionDependencies(cond).some(
+        (dep) => resolveTarget(schema, scope, dep) === target,
+      );
       if (hits) refs.push({ from: path, property });
     };
     check(field.visibleWhen, 'visibleWhen');
@@ -51,8 +58,10 @@ function renameInCondition(
   shouldRename: (dependency: string) => boolean,
   newName: string,
 ): Condition {
-  if ('all' in cond) return { all: cond.all.map((c) => renameInCondition(c, shouldRename, newName)) };
-  if ('any' in cond) return { any: cond.any.map((c) => renameInCondition(c, shouldRename, newName)) };
+  if ('all' in cond)
+    return { all: cond.all.map((c) => renameInCondition(c, shouldRename, newName)) };
+  if ('any' in cond)
+    return { any: cond.any.map((c) => renameInCondition(c, shouldRename, newName)) };
   if ('not' in cond) return { not: renameInCondition(cond.not, shouldRename, newName) };
   if (!shouldRename(cond.field)) return cond;
   const rest = cond.field.split('.').slice(1);
@@ -86,4 +95,3 @@ export function renameReferences(
     return next;
   });
 }
-

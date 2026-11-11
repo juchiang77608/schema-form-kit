@@ -52,7 +52,8 @@ export function replaceFieldsAt(
     let found = false;
     const next = fields.map((field) => {
       if (field.name !== target) return field;
-      if (field.type !== 'array') throw new Error(`"${names.slice(0, depth + 1).join('.')}" is not a group`);
+      if (field.type !== 'array')
+        throw new Error(`"${names.slice(0, depth + 1).join('.')}" is not a group`);
       found = true;
       return { ...field, fields: walk(field.fields, depth + 1) } satisfies ArrayField;
     });

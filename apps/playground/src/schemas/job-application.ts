@@ -32,7 +32,10 @@ export const jobApplication: FormSchema = {
       options: [
         { label: { 'zh-TW': '前端工程師', en: 'Frontend engineer' }, value: 'frontend' },
         { label: { 'zh-TW': '後端工程師', en: 'Backend engineer' }, value: 'backend' },
-        { label: { 'zh-TW': '資深全端工程師', en: 'Senior full-stack engineer' }, value: 'senior-fullstack' },
+        {
+          label: { 'zh-TW': '資深全端工程師', en: 'Senior full-stack engineer' },
+          value: 'senior-fullstack',
+        },
       ],
     },
     {

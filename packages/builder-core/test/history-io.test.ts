@@ -39,7 +39,8 @@ describe('history', () => {
 
   it('coalesces commits with the same key into one undo step', () => {
     let h = createHistory('');
-    for (const text of ['H', 'He', 'Hel', 'Hell', 'Hello']) h = commit(h, text, { coalesceKey: 'label:name' });
+    for (const text of ['H', 'He', 'Hel', 'Hell', 'Hello'])
+      h = commit(h, text, { coalesceKey: 'label:name' });
     h = commit(h, 'Hello!', { coalesceKey: 'label:email' });
     expect(h.past).toEqual(['', 'Hello']);
     expect(undo(h).present).toBe('Hello');
@@ -91,12 +92,21 @@ describe('importSchema / exportSchema', () => {
         id: 'x',
         version: 2,
         title: 'X',
-        fields: [{ name: 'a', type: 'slider', label: 'A' }, { name: 'b', type: 'select', label: 'B' }, 'oops'],
+        fields: [
+          { name: 'a', type: 'slider', label: 'A' },
+          { name: 'b', type: 'select', label: 'B' },
+          'oops',
+        ],
       }),
     );
     expect(shape.ok).toBe(false);
     if (!shape.ok) {
-      expect(shape.errors.map((e) => e.path)).toEqual(['version', 'fields[0].type', 'fields[1].options', 'fields[2]']);
+      expect(shape.errors.map((e) => e.path)).toEqual([
+        'version',
+        'fields[0].type',
+        'fields[1].options',
+        'fields[2]',
+      ]);
     }
   });
 
@@ -106,10 +116,13 @@ describe('importSchema / exportSchema', () => {
         id: 'x',
         version: 1,
         title: 'X',
-        fields: [{ name: 'a', type: 'text', label: 'A', visibleWhen: { field: 'ghost', op: 'empty' } }],
+        fields: [
+          { name: 'a', type: 'text', label: 'A', visibleWhen: { field: 'ghost', op: 'empty' } },
+        ],
       }),
     );
     expect(result.ok).toBe(true);
-    if (result.ok) expect(result.warnings.map((w) => w.message)).toEqual(['Unknown field "ghost" in condition']);
+    if (result.ok)
+      expect(result.warnings.map((w) => w.message)).toEqual(['Unknown field "ghost" in condition']);
   });
 });
