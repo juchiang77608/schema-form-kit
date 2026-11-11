@@ -67,7 +67,12 @@ const schema: FormSchema = {
         { type: 'maxItems', value: 3 },
       ],
       fields: [
-        { name: 'company', type: 'text', label: { 'zh-TW': '公司', en: 'Company' }, required: true },
+        {
+          name: 'company',
+          type: 'text',
+          label: { 'zh-TW': '公司', en: 'Company' },
+          required: true,
+        },
         { name: 'current', type: 'switch', label: { 'zh-TW': '目前任職', en: 'Current' } },
         {
           name: 'endDate',
@@ -126,7 +131,11 @@ describe('validateForm', () => {
   });
 
   it('checks types before rules', () => {
-    const errors = validateForm(schema, { ...valid(), email: 'nope', level: 'cto' }, { locale: 'en' });
+    const errors = validateForm(
+      schema,
+      { ...valid(), email: 'nope', level: 'cto' },
+      { locale: 'en' },
+    );
     expect(errors.email).toEqual(['Email must be a valid email address']);
     expect(errors.level).toEqual(['Level has an invalid option']);
   });
@@ -138,9 +147,9 @@ describe('validateForm', () => {
   });
 
   it('applies conditional required and skips rules on empty optional values', () => {
-    expect(validateForm(schema, { ...valid(), level: 'senior' }, { locale: 'en' }).portfolio).toEqual([
-      'Portfolio URL is required',
-    ]);
+    expect(
+      validateForm(schema, { ...valid(), level: 'senior' }, { locale: 'en' }).portfolio,
+    ).toEqual(['Portfolio URL is required']);
     expect(
       validateForm(schema, { ...valid(), level: 'senior', portfolio: 'http://x' }, { locale: 'en' })
         .portfolio,
@@ -149,9 +158,9 @@ describe('validateForm', () => {
 
   it('ignores hidden fields even when required', () => {
     expect(validateForm(schema, valid()).referrer).toBeUndefined();
-    expect(validateForm(schema, { ...valid(), source: 'referral' }, { locale: 'en' }).referrer).toEqual([
-      'Referrer is required',
-    ]);
+    expect(
+      validateForm(schema, { ...valid(), source: 'referral' }, { locale: 'en' }).referrer,
+    ).toEqual(['Referrer is required']);
   });
 
   it('validates array size and item fields with item-scoped conditions', () => {
@@ -173,9 +182,9 @@ describe('validateForm', () => {
     expect(errors['experiences.2.endDate']).toEqual(['End date must be a valid date']);
     expect(Object.keys(errorsUnder(errors, 'experiences'))).toHaveLength(3);
 
-    expect(validateForm(schema, { ...valid(), experiences: [] }, { locale: 'en' }).experiences).toEqual([
-      'Experience needs at least 1 items',
-    ]);
+    expect(
+      validateForm(schema, { ...valid(), experiences: [] }, { locale: 'en' }).experiences,
+    ).toEqual(['Experience needs at least 1 items']);
   });
 
   it('requires a required switch to be on', () => {
@@ -203,7 +212,9 @@ describe('validateForm', () => {
     expect(validateForm(custom, { code: '3' }, { customValidators: { even } }).code).toEqual([
       'Must be even',
     ]);
-    expect(hasErrors(validateForm(custom, { code: '4' }, { customValidators: { even } }))).toBe(false);
+    expect(hasErrors(validateForm(custom, { code: '4' }, { customValidators: { even } }))).toBe(
+      false,
+    );
     expect(() => validateForm(custom, { code: '3' })).toThrow('not registered');
   });
 });
@@ -228,14 +239,24 @@ describe('pruneHiddenValues', () => {
       title: 'P',
       fields: [
         { name: 'hasPet', type: 'switch', label: 'Has pet' },
-        { name: 'petName', type: 'text', label: 'Pet', visibleWhen: { field: 'hasPet', op: 'eq', value: true } },
+        {
+          name: 'petName',
+          type: 'text',
+          label: 'Pet',
+          visibleWhen: { field: 'hasPet', op: 'eq', value: true },
+        },
         {
           name: 'jobs',
           type: 'array',
           label: 'Jobs',
           fields: [
             { name: 'current', type: 'switch', label: 'Current' },
-            { name: 'end', type: 'date', label: 'End', visibleWhen: { field: 'current', op: 'eq', value: false } },
+            {
+              name: 'end',
+              type: 'date',
+              label: 'End',
+              visibleWhen: { field: 'current', op: 'eq', value: false },
+            },
           ],
         },
       ],

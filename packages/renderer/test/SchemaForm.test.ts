@@ -48,7 +48,10 @@ const wizard: FormSchema = {
 };
 
 function mountForm(s: FormSchema = schema, props: Record<string, unknown> = {}) {
-  return mount(SchemaForm, { props: { schema: s, locale: 'en', ...props }, attachTo: document.body });
+  return mount(SchemaForm, {
+    props: { schema: s, locale: 'en', ...props },
+    attachTo: document.body,
+  });
 }
 
 describe('<SchemaForm>', () => {
@@ -95,7 +98,9 @@ describe('<SchemaForm>', () => {
   });
 
   it('adds, edits and removes array items', async () => {
-    const wrapper = mountForm(schema, { modelValue: { name: 'Mei', plan: 'team', company: 'Acme' } });
+    const wrapper = mountForm(schema, {
+      modelValue: { name: 'Mei', plan: 'team', company: 'Acme' },
+    });
 
     await wrapper.find('.sfk-array > button.sfk-btn--secondary').trigger('click');
     const email = wrapper.find('input[name="members.0.email"]');
@@ -136,15 +141,32 @@ describe('<SchemaForm>', () => {
 
   it('uses a custom component for a field type', async () => {
     const Stars = defineComponent({
-      props: { modelValue: { type: String, default: '' }, inputId: { type: String, required: true } },
+      props: {
+        modelValue: { type: String, default: '' },
+        inputId: { type: String, required: true },
+      },
       emits: ['update:modelValue', 'blur'],
       setup(props, { emit }) {
         return () =>
-          h('button', { id: props.inputId, type: 'button', class: 'stars', onClick: () => emit('update:modelValue', '★★★') }, props.modelValue || 'rate');
+          h(
+            'button',
+            {
+              id: props.inputId,
+              type: 'button',
+              class: 'stars',
+              onClick: () => emit('update:modelValue', '★★★'),
+            },
+            props.modelValue || 'rate',
+          );
       },
     });
     const wrapper = mountForm(
-      { id: 'c', version: 1, title: 'C', fields: [{ name: 'rating', type: 'text', label: 'Rating' }] },
+      {
+        id: 'c',
+        version: 1,
+        title: 'C',
+        fields: [{ name: 'rating', type: 'text', label: 'Rating' }],
+      },
       { components: { text: Stars } },
     );
     await wrapper.find('.stars').trigger('click');

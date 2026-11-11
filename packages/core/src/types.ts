@@ -32,17 +32,7 @@ export interface Option {
 // ---------------------------------------------------------------------------
 
 export type ComparisonOperator =
-  | 'eq'
-  | 'neq'
-  | 'gt'
-  | 'gte'
-  | 'lt'
-  | 'lte'
-  | 'in'
-  | 'notIn'
-  | 'includes'
-  | 'empty'
-  | 'notEmpty';
+  'eq' | 'neq' | 'gt' | 'gte' | 'lt' | 'lte' | 'in' | 'notIn' | 'includes' | 'empty' | 'notEmpty';
 
 /**
  * Compares the value at `field` (a dot path) with `value`.
@@ -148,13 +138,7 @@ export interface ArrayField extends BaseField {
 }
 
 export type FieldSchema =
-  | TextField
-  | NumberField
-  | DateField
-  | ChoiceField
-  | CheckboxField
-  | SwitchField
-  | ArrayField;
+  TextField | NumberField | DateField | ChoiceField | CheckboxField | SwitchField | ArrayField;
 
 export interface StepSchema {
   id: string;

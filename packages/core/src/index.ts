@@ -19,11 +19,5 @@ export {
   pruneHiddenValues,
   effectiveValues,
 } from './fields';
-export {
-  validateForm,
-  validateStep,
-  validateFields,
-  hasErrors,
-  errorsUnder,
-} from './validation';
+export { validateForm, validateStep, validateFields, hasErrors, errorsUnder } from './validation';
 export { checkSchema, type SchemaIssue } from './schema-check';

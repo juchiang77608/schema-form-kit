@@ -1,11 +1,5 @@
 import { isEmpty, type ConditionContext } from './conditions';
-import {
-  effectiveValues,
-  fieldsOfStep,
-  getSteps,
-  isFieldRequired,
-  isFieldVisible,
-} from './fields';
+import { effectiveValues, fieldsOfStep, getSteps, isFieldRequired, isFieldVisible } from './fields';
 import { DEFAULT_LOCALE, format, messages, t, type MessageKey } from './i18n';
 import { getPath, joinPath } from './path';
 import type {
@@ -147,7 +141,8 @@ function validateFieldInto(
   const rc: RuleContext = { label: t(field.label, locale), locale };
   const value = getPath(values, path);
   const fieldErrors: string[] = [];
-  const empty = field.type === 'switch' ? value !== true && isFieldRequired(field, ctx) : isEmpty(value);
+  const empty =
+    field.type === 'switch' ? value !== true && isFieldRequired(field, ctx) : isEmpty(value);
 
   if (empty) {
     if (isFieldRequired(field, ctx)) fieldErrors.push(msg('required', rc));

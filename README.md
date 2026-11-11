@@ -10,11 +10,12 @@ repeatable groups and i18n, with a framework-agnostic core.
 
 ## Packages
 
-| Package | Description |
-|---|---|
-| [`@schema-form-kit/core`](packages/core) | Schema types, condition engine, validation, i18n, schema checks. No runtime dependencies. |
-| [`@schema-form-kit/vue`](packages/renderer) | `<SchemaForm>` component, field components and the headless `useSchemaForm` composable. |
-| [`playground`](apps/playground) | Live editor: edit the JSON on the left, see the form on the right. |
+| Package                                                  | Description                                                                                                                          |
+| -------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------ |
+| [`@schema-form-kit/core`](packages/core)                 | Schema types, condition engine, validation, i18n, schema checks. No runtime dependencies.                                            |
+| [`@schema-form-kit/vue`](packages/renderer)              | `<SchemaForm>` component, field components and the headless `useSchemaForm` composable.                                              |
+| [`@schema-form-kit/builder-core`](packages/builder-core) | Editing operations for the visual builder: add, move, rename (with reference updates), change type, steps, undo/redo, import/export. |
+| [`playground`](apps/playground)                          | Live editor: edit the JSON on the left, see the form on the right.                                                                   |
 
 ## Quick start
 
@@ -104,6 +105,7 @@ packages/renderer    Vue 3 — how the form looks
   SchemaForm.vue     form shell, stepper, footer
   FieldRenderer.vue  label, description, errors, picks the field component
   fields/*.vue       one component per field type
+packages/builder-core  editing operations used by the visual builder
 apps/playground      live JSON editor + preview
 ```
 
@@ -112,7 +114,8 @@ Decisions are recorded in [`docs/adr`](docs/adr).
 ## Roadmap
 
 - [x] Core engine, Vue renderer, playground
-- [ ] Visual builder (drag and drop fields, property panel, undo/redo)
+- [x] Builder logic (`builder-core`): editing operations, reference-safe rename, undo/redo, import/export
+- [ ] Visual builder UI (drag and drop fields, property panel)
 - [ ] Documentation site (VitePress)
 - [ ] File and address field types
 - [ ] Publish to npm

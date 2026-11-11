@@ -5,7 +5,12 @@
   "forwardPorts": [5173],
   "customizations": {
     "vscode": {
-      "extensions": ["Vue.volar", "dbaeumer.vscode-eslint", "esbenp.prettier-vscode", "vitest.explorer"]
+      "extensions": [
+        "Vue.volar",
+        "dbaeumer.vscode-eslint",
+        "esbenp.prettier-vscode",
+        "vitest.explorer"
+      ]
     }
   }
 }

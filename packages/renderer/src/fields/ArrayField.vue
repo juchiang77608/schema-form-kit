@@ -75,7 +75,12 @@ function move(index: number, delta: number): void {
         />
       </div>
       <div class="sfk-array__actions">
-        <button type="button" class="sfk-btn sfk-btn--ghost" :disabled="index === 0" @click="move(index, -1)">
+        <button
+          type="button"
+          class="sfk-btn sfk-btn--ghost"
+          :disabled="index === 0"
+          @click="move(index, -1)"
+        >
           {{ text.up }}
         </button>
         <button
@@ -91,8 +96,6 @@ function move(index: number, delta: number): void {
         </button>
       </div>
     </fieldset>
-    <button type="button" class="sfk-btn sfk-btn--secondary" @click="add">
-      + {{ addLabel }}
-    </button>
+    <button type="button" class="sfk-btn sfk-btn--secondary" @click="add">+ {{ addLabel }}</button>
   </div>
 </template>

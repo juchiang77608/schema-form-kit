@@ -1,6 +1,12 @@
 <script setup lang="ts">
 import { computed, ref, watch } from 'vue';
-import { checkSchema, t, type FormSchema, type FormValues, type Locale } from '@schema-form-kit/core';
+import {
+  checkSchema,
+  t,
+  type FormSchema,
+  type FormValues,
+  type Locale,
+} from '@schema-form-kit/core';
 import { SchemaForm } from '@schema-form-kit/vue';
 import { presets } from './schemas';
 import { clearDraft, loadDraft, saveDraft } from './storage';
@@ -80,7 +86,9 @@ function resetPreset(): void {
 
 watch(presetId, loadPreset, { immediate: true });
 watch(source, applySource);
-watch([source, values], () => saveDraft(presetId.value, { source: source.value, values: values.value }));
+watch([source, values], () =>
+  saveDraft(presetId.value, { source: source.value, values: values.value }),
+);
 </script>
 
 <template>
@@ -91,7 +99,9 @@ watch([source, values], () => saveDraft(presetId.value, { source: source.value, 
         <p class="muted">{{ ui.tagline }}</p>
       </div>
       <nav class="links">
-        <a href="https://github.com/juchiang77608/schema-form-kit" target="_blank" rel="noreferrer">GitHub</a>
+        <a href="https://github.com/juchiang77608/schema-form-kit" target="_blank" rel="noreferrer"
+          >GitHub</a
+        >
         <a href="https://forms-docs.janicechiang.dev" target="_blank" rel="noreferrer">Docs</a>
       </nav>
     </header>
@@ -156,7 +166,13 @@ watch([source, values], () => saveDraft(presetId.value, { source: source.value, 
 <style>
 :root {
   font-family:
-    'Inter', 'Noto Sans TC', system-ui, -apple-system, 'Segoe UI', 'PingFang TC', 'Microsoft JhengHei',
+    'Inter',
+    'Noto Sans TC',
+    system-ui,
+    -apple-system,
+    'Segoe UI',
+    'PingFang TC',
+    'Microsoft JhengHei',
     sans-serif;
   color: #1f2328;
   background: #f3f4f6;

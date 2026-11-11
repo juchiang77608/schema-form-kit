@@ -78,7 +78,10 @@ export const satisfactionSurvey: FormSchema = {
         {
           type: 'pattern',
           value: '^09\\d{2}-?\\d{3}-?\\d{3}$',
-          message: { 'zh-TW': '請輸入手機號碼，例如 0912-345-678', en: 'Use a mobile number like 0912-345-678' },
+          message: {
+            'zh-TW': '請輸入手機號碼，例如 0912-345-678',
+            en: 'Use a mobile number like 0912-345-678',
+          },
         },
       ],
     },

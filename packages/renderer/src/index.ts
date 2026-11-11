@@ -3,7 +3,11 @@ import SchemaForm from './SchemaForm.vue';
 import FieldRenderer from './FieldRenderer.vue';
 
 export { SchemaForm, FieldRenderer };
-export { useSchemaForm, type UseSchemaFormOptions, type SchemaFormState } from './composables/useSchemaForm';
+export {
+  useSchemaForm,
+  type UseSchemaFormOptions,
+  type SchemaFormState,
+} from './composables/useSchemaForm';
 export {
   useFormContext,
   FORM_CONTEXT,

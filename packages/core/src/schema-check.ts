@@ -29,7 +29,10 @@ function checkFields(
     if (CHOICE_TYPES.has(field.type)) {
       const options = 'options' in field ? field.options : [];
       if (!options || options.length === 0) {
-        issues.push({ path: `${at}.options`, message: `"${field.name}" needs at least one option` });
+        issues.push({
+          path: `${at}.options`,
+          message: `"${field.name}" needs at least one option`,
+        });
       }
     }
 
@@ -72,7 +75,10 @@ function checkFields(
 export function checkSchema(schema: FormSchema): SchemaIssue[] {
   const issues: SchemaIssue[] = [];
   if (schema.version !== 1) {
-    issues.push({ path: 'version', message: `Unsupported schema version ${String(schema.version)}` });
+    issues.push({
+      path: 'version',
+      message: `Unsupported schema version ${String(schema.version)}`,
+    });
   }
   const topLevel = new Set(schema.fields.map((f) => f.name));
   checkFields(schema.fields, 'fields', topLevel, issues);

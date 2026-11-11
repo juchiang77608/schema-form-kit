@@ -1,11 +1,5 @@
 import { inject, type Component, type ComputedRef, type InjectionKey, type Ref } from 'vue';
-import type {
-  FieldSchema,
-  FieldType,
-  FormSchema,
-  FormValues,
-  Locale,
-} from '@schema-form-kit/core';
+import type { FieldSchema, FieldType, FormSchema, FormValues, Locale } from '@schema-form-kit/core';
 
 /** Props every field component receives. Use them to build your own field components. */
 export interface FieldComponentProps {
