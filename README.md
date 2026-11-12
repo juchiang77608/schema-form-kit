@@ -14,6 +14,7 @@ repeatable groups and i18n, with a framework-agnostic core.
 | -------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------ |
 | [`@schema-form-kit/core`](packages/core)                 | Schema types, condition engine, validation, i18n, schema checks. No runtime dependencies.                                            |
 | [`@schema-form-kit/vue`](packages/renderer)              | `<SchemaForm>` component, field components and the headless `useSchemaForm` composable.                                              |
+| [`@schema-form-kit/builder`](packages/builder)           | Visual builder UI: palette, drag-and-drop canvas, property panel, steps, undo/redo, import/export, preview.                          |
 | [`@schema-form-kit/builder-core`](packages/builder-core) | Editing operations for the visual builder: add, move, rename (with reference updates), change type, steps, undo/redo, import/export. |
 | [`playground`](apps/playground)                          | Live editor: edit the JSON on the left, see the form on the right.                                                                   |
 
@@ -114,7 +115,9 @@ Decisions are recorded in [`docs/adr`](docs/adr).
 ## Roadmap
 
 - [x] Core engine, Vue renderer, playground
-- [ ] Visual builder (drag and drop fields, property panel, undo/redo)
+- [x] Visual builder (drag and drop fields, property panel, undo/redo)
+- [x] Builder logic (`builder-core`): editing operations, reference-safe rename, undo/redo, import/export
+- [x] Visual builder UI (drag and drop fields, property panel) — try it at `#/builder` in the playground
 - [ ] Documentation site (VitePress)
 - [ ] File and address field types
 - [ ] Publish to npm

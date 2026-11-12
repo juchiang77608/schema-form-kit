@@ -1,0 +1,14 @@
+{
+  "extends": ["@vue/tsconfig/tsconfig.dom.json", "../../tsconfig.base.json"],
+  "compilerOptions": {
+    "noEmit": true,
+    "allowImportingTsExtensions": true,
+    "types": ["node"],
+    "paths": {
+      "@schema-form-kit/core": ["../core/src/index.ts"],
+      "@schema-form-kit/vue": ["../renderer/src/index.ts"],
+      "@schema-form-kit/builder-core": ["../builder-core/src/index.ts"]
+    }
+  },
+  "include": ["src", "test", "vite.config.ts"]
+}

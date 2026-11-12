@@ -99,6 +99,7 @@ watch([source, values], () =>
         <p class="muted">{{ ui.tagline }}</p>
       </div>
       <nav class="links">
+        <a href="#/builder">Builder</a>
         <a href="https://github.com/juchiang77608/schema-form-kit" target="_blank" rel="noreferrer"
           >GitHub</a
         >

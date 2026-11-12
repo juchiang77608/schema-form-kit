@@ -3,7 +3,14 @@
   "changelog": "@changesets/cli/changelog",
   "commit": false,
   "fixed": [],
-  "linked": [["@schema-form-kit/core", "@schema-form-kit/vue", "@schema-form-kit/builder-core"]],
+  "linked": [
+    [
+      "@schema-form-kit/core",
+      "@schema-form-kit/vue",
+      "@schema-form-kit/builder-core",
+      "@schema-form-kit/builder"
+    ]
+  ],
   "access": "public",
   "baseBranch": "main",
   "updateInternalDependencies": "patch",

@@ -3,7 +3,7 @@ import { defineConfig } from 'vitest/config';
 // Root config: each package declares its own project (environment, plugins).
 export default defineConfig({
   test: {
-    projects: ['packages/core', 'packages/renderer', 'packages/builder-core'],
+    projects: ['packages/core', 'packages/renderer', 'packages/builder-core', 'packages/builder'],
     coverage: {
       provider: 'v8',
       include: ['packages/*/src/**'],

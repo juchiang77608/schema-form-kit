@@ -10,6 +10,8 @@
     "typecheck": "vue-tsc --noEmit -p tsconfig.json"
   },
   "dependencies": {
+    "@schema-form-kit/builder": "workspace:*",
+    "@schema-form-kit/builder-core": "workspace:*",
     "@schema-form-kit/core": "workspace:*",
     "@schema-form-kit/vue": "workspace:*",
     "vue": "^3.5.34"
