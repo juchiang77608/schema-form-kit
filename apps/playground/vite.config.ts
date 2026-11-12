@@ -11,6 +11,15 @@ export default defineConfig({
     alias: [
       { find: '@schema-form-kit/core', replacement: src('../../packages/core/src/index.ts') },
       {
+        find: '@schema-form-kit/builder-core',
+        replacement: src('../../packages/builder-core/src/index.ts'),
+      },
+      {
+        find: '@schema-form-kit/builder/styles.css',
+        replacement: src('../../packages/builder/src/styles.css'),
+      },
+      { find: '@schema-form-kit/builder', replacement: src('../../packages/builder/src/index.ts') },
+      {
         find: '@schema-form-kit/vue/styles.css',
         replacement: src('../../packages/renderer/src/styles.css'),
       },

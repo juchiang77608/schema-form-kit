@@ -6,7 +6,9 @@
     "types": ["node", "vite/client"],
     "paths": {
       "@schema-form-kit/core": ["../../packages/core/src/index.ts"],
-      "@schema-form-kit/vue": ["../../packages/renderer/src/index.ts"]
+      "@schema-form-kit/vue": ["../../packages/renderer/src/index.ts"],
+      "@schema-form-kit/builder-core": ["../../packages/builder-core/src/index.ts"],
+      "@schema-form-kit/builder": ["../../packages/builder/src/index.ts"]
     }
   },
   "include": ["src", "vite.config.ts"]
