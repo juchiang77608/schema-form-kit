@@ -1,0 +1,51 @@
+{
+  "name": "@schema-form-kit/builder",
+  "version": "0.1.0",
+  "description": "Visual drag-and-drop form builder for schema-form-kit (Vue 3).",
+  "license": "MIT",
+  "author": "Janice Chiang",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/juchiang77608/schema-form-kit.git",
+    "directory": "packages/builder"
+  },
+  "type": "module",
+  "sideEffects": [
+    "**/*.css"
+  ],
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js"
+    },
+    "./styles.css": "./dist/styles.css"
+  },
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "build": "vite build && vue-tsc -p tsconfig.build.json && node -e \"require('node:fs').copyFileSync('src/styles.css','dist/styles.css')\"",
+    "typecheck": "vue-tsc --noEmit -p tsconfig.json"
+  },
+  "peerDependencies": {
+    "vue": "^3.5.0"
+  },
+  "dependencies": {
+    "@schema-form-kit/builder-core": "workspace:^",
+    "@schema-form-kit/core": "workspace:^",
+    "@schema-form-kit/vue": "workspace:^"
+  },
+  "devDependencies": {
+    "@vitejs/plugin-vue": "^6.0.6",
+    "@vue/test-utils": "^2.4.6",
+    "@vue/tsconfig": "^0.9.1",
+    "happy-dom": "^20.0.0",
+    "typescript": "~6.0.2",
+    "vite": "^8.0.12",
+    "vitest": "^4.0.0",
+    "vue": "^3.5.34",
+    "vue-tsc": "^3.2.8"
+  }
+}
