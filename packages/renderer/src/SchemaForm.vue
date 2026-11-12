@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { computed, nextTick, provide, ref, watch } from 'vue';
+import { computed, nextTick, provide, ref, toRaw, watch } from 'vue';
 import {
   buildInitialValues,
   pruneHiddenValues,
@@ -54,7 +54,8 @@ provide(FORM_CONTEXT, {
   values: form.values,
   visibleValues: form.visibleValues,
   locale: form.locale,
-  components: computed(() => props.components),
+  // Components must not be made reactive (Vue warns and it costs performance).
+  components: computed(() => toRaw(props.components)),
   setValue: form.setValue,
   touch: form.touch,
   errorsFor: form.errorsFor,

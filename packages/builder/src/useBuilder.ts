@@ -77,18 +77,25 @@ export function useBuilder(
     selected.value ? getField(schema.value, selected.value) : undefined,
   );
 
-  // Keep the selection and active step valid after undo/redo or removals.
-  watch(schema, (next) => {
-    if (selected.value && !getField(next, selected.value)) selected.value = null;
-    if (activeStepId.value && !next.steps?.some((s) => s.id === activeStepId.value)) {
-      activeStepId.value = next.steps?.[0]?.id ?? null;
+  /**
+   * Replaces the history and keeps the selection and active step valid.
+   * Done synchronously on every change: a watcher would miss changes that
+   * cancel out within one tick (e.g. add then undo).
+   */
+  function setHistory(next: typeof history.value): void {
+    history.value = next;
+    const current = next.present;
+    if (selected.value && !getField(current, selected.value)) selected.value = null;
+    if (activeStepId.value && !current.steps?.some((s) => s.id === activeStepId.value)) {
+      activeStepId.value = current.steps?.[0]?.id ?? null;
     }
-    options.onChange?.(next);
-  });
+  }
+
+  watch(schema, (next) => options.onChange?.(next));
 
   function apply(edit: (current: FormSchema) => FormSchema, coalesceKey?: string): boolean {
     try {
-      history.value = commit(history.value, edit(schema.value), { coalesceKey });
+      setHistory(commit(history.value, edit(schema.value), { coalesceKey }));
       error.value = null;
       return true;
     } catch (e) {
@@ -261,17 +268,17 @@ export function useBuilder(
   const canRedoRef = computed(() => canRedo(history.value));
 
   function undoEdit(): void {
-    history.value = undo(history.value);
+    setHistory(undo(history.value));
   }
 
   function redoEdit(): void {
-    history.value = redo(history.value);
+    setHistory(redo(history.value));
   }
 
   function load(json: string): ImportResult {
     const result = importSchema(json);
     if (result.ok) {
-      history.value = commit(history.value, result.schema);
+      setHistory(commit(history.value, result.schema));
       selected.value = null;
       activeStepId.value = result.schema.steps?.[0]?.id ?? null;
       error.value = null;
