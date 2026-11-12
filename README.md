@@ -115,6 +115,7 @@ Decisions are recorded in [`docs/adr`](docs/adr).
 ## Roadmap
 
 - [x] Core engine, Vue renderer, playground
+- [x] Visual builder (drag and drop fields, property panel, undo/redo)
 - [x] Builder logic (`builder-core`): editing operations, reference-safe rename, undo/redo, import/export
 - [x] Visual builder UI (drag and drop fields, property panel) — try it at `#/builder` in the playground
 - [ ] Documentation site (VitePress)
