@@ -61,6 +61,9 @@ Every user-facing string is an `I18nText`: either one string, or one string per 
 The built-in locales are `zh-TW` (the default) and `en`. Pass `locale="en"` to `<SchemaForm>` to
 switch. Built-in validation messages exist for both locales.
 
+The language menu in the top bar switches **these docs**. The language menu inside a live example
+switches that example form. The two are independent.
+
 ## Checking a schema
 
 Mistakes in a hand-written schema are easy to make. `checkSchema` reports them before you render:
