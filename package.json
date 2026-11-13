@@ -8,6 +8,7 @@
   },
   "scripts": {
     "dev": "pnpm --filter @schema-form-kit/playground dev",
+    "docs:dev": "pnpm --filter @schema-form-kit/docs dev",
     "build": "pnpm -r build",
     "test": "vitest run",
     "test:watch": "vitest",
