@@ -6,7 +6,7 @@ coverage/
 .env
 .env.*
 !.env.example
-.vitepress/cache/
+**/.vitepress/cache/
 .wrangler/
 playwright-report/
 test-results/

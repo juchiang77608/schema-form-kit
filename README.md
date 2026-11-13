@@ -1,12 +1,29 @@
 # schema-form-kit
 
-JSON-driven forms for Vue 3 — conditional logic, validation, multi-step wizards,
-repeatable groups and i18n, with a framework-agnostic core.
+[![CI](https://github.com/juchiang77608/schema-form-kit/actions/workflows/ci.yml/badge.svg)](https://github.com/juchiang77608/schema-form-kit/actions/workflows/ci.yml)
+![TypeScript](https://img.shields.io/badge/TypeScript-strict-3178c6)
+![Vue](https://img.shields.io/badge/Vue-3.5-42b883)
+[![License: MIT](https://img.shields.io/badge/license-MIT-blue)](LICENSE)
 
-**Playground:** https://forms.janicechiang.dev
+JSON-driven forms for Vue 3 — conditional logic, validation, multi-step wizards,
+repeatable groups and i18n, with a framework-agnostic core and a visual drag-and-drop builder.
+
+| Demo                                                     |                                                       |
+| -------------------------------------------------------- | ----------------------------------------------------- |
+| [**Builder**](https://forms.janicechiang.dev/#/builder)  | Build a form by drag and drop, then export JSON.      |
+| [**Playground**](https://forms.janicechiang.dev)         | Edit the JSON on the left, see the form on the right. |
+| [**Documentation**](https://forms-docs.janicechiang.dev) | Guides with live examples and the API reference.      |
 
 > 中文簡介：用一份 JSON 描述表單，就能產生具備條件顯示、驗證、多步驟、重複群組與中英文訊息的 Vue 3 表單。
 > 表單規則放在與框架無關的 `core` 套件，UI 由 `@schema-form-kit/vue` 負責。
+
+## Screenshots
+
+![Visual builder: palette, form canvas and property panel](docs/images/builder-edit.png)
+
+| Builder preview                                                          | Playground                                                               |
+| ------------------------------------------------------------------------ | ------------------------------------------------------------------------ |
+| ![Builder preview of a multi-step form](docs/images/builder-preview.png) | ![Playground with JSON editor and live form](docs/images/playground.png) |
 
 ## Packages
 
@@ -17,6 +34,7 @@ repeatable groups and i18n, with a framework-agnostic core.
 | [`@schema-form-kit/builder`](packages/builder)           | Visual builder UI: palette, drag-and-drop canvas, property panel, steps, undo/redo, import/export, preview.                          |
 | [`@schema-form-kit/builder-core`](packages/builder-core) | Editing operations for the visual builder: add, move, rename (with reference updates), change type, steps, undo/redo, import/export. |
 | [`playground`](apps/playground)                          | Live editor: edit the JSON on the left, see the form on the right.                                                                   |
+| [`docs`](apps/docs)                                      | Documentation site (VitePress) with live examples.                                                                                   |
 
 ## Quick start
 
@@ -84,6 +102,7 @@ Requirements: Node.js 24 (`.nvmrc`), pnpm 10 (`corepack enable`).
 ```bash
 pnpm install          # first run creates pnpm-lock.yaml — commit it
 pnpm dev              # playground at http://localhost:5173
+pnpm docs:dev         # documentation site at http://localhost:5173
 pnpm test             # unit + component tests (Vitest)
 pnpm typecheck
 pnpm lint
@@ -106,8 +125,15 @@ packages/renderer    Vue 3 — how the form looks
   SchemaForm.vue     form shell, stepper, footer
   FieldRenderer.vue  label, description, errors, picks the field component
   fields/*.vue       one component per field type
-packages/builder-core  editing operations used by the visual builder
-apps/playground      live JSON editor + preview
+packages/builder-core  pure TypeScript — editing operations for the builder
+  operations.ts      add, move, rename (with reference updates), change type, steps
+  history.ts         undo/redo with merged typing
+  io.ts              import with checks, export
+packages/builder     Vue 3 — the builder UI
+  useBuilder.ts      selection, drag and drop, history
+  FormBuilder.vue    toolbar, palette, canvas, property panel, preview
+apps/playground      live JSON editor + preview, and the builder at #/builder
+apps/docs            VitePress documentation site
 ```
 
 Decisions are recorded in [`docs/adr`](docs/adr).
@@ -115,11 +141,11 @@ Decisions are recorded in [`docs/adr`](docs/adr).
 ## Roadmap
 
 - [x] Core engine, Vue renderer, playground
-- [x] Visual builder (drag and drop fields, property panel, undo/redo)
 - [x] Builder logic (`builder-core`): editing operations, reference-safe rename, undo/redo, import/export
-- [x] Visual builder UI (drag and drop fields, property panel) — try it at `#/builder` in the playground
-- [ ] Documentation site (VitePress)
+- [x] Visual builder UI: drag and drop, property panel, condition editor, steps, preview
+- [x] Documentation site (VitePress)
 - [ ] File and address field types
+- [ ] End-to-end tests (Playwright)
 - [ ] Publish to npm
 
 ## License

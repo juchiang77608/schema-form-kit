@@ -1,0 +1,79 @@
+:root {
+  --vp-c-brand-1: #4f46e5;
+  --vp-c-brand-2: #4338ca;
+  --vp-c-brand-3: #4f46e5;
+  --vp-c-brand-soft: rgba(79, 70, 229, 0.14);
+}
+
+.dark {
+  --vp-c-brand-1: #a5b4fc;
+  --vp-c-brand-2: #818cf8;
+  --vp-c-brand-3: #6366f1;
+}
+
+.demo {
+  margin: 16px 0;
+  border: 1px solid var(--vp-c-divider);
+  border-radius: 12px;
+  overflow: hidden;
+  background: var(--vp-c-bg-soft);
+}
+
+.demo__bar {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 12px;
+  padding: 8px 16px;
+  border-bottom: 1px solid var(--vp-c-divider);
+  font-size: 13px;
+  color: var(--vp-c-text-2);
+}
+
+.demo__label {
+  margin-right: auto;
+  font-weight: 600;
+}
+
+.demo__control {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.demo__control select,
+.demo__reset {
+  padding: 2px 8px;
+  border: 1px solid var(--vp-c-divider);
+  border-radius: 6px;
+  background: var(--vp-c-bg);
+  color: var(--vp-c-text-1);
+  font-size: 13px;
+  cursor: pointer;
+}
+
+/* The form keeps its own light theme so it looks the same as in an app. */
+.demo__body {
+  padding: 20px;
+  background: #ffffff;
+  color: #1f2328;
+}
+
+.demo__values {
+  padding: 8px 16px;
+  border-top: 1px solid var(--vp-c-divider);
+  font-size: 13px;
+}
+
+.demo__values summary {
+  cursor: pointer;
+  color: var(--vp-c-text-2);
+}
+
+.demo__values pre {
+  margin: 8px 0 0;
+  max-height: 260px;
+  overflow: auto;
+  font-family: var(--vp-font-family-mono);
+  font-size: 12px;
+}

@@ -31,7 +31,7 @@ jobs:
       - name: Bundle size
         run: |
           echo "### Bundle size" >> "$GITHUB_STEP_SUMMARY"
-          for f in packages/core/dist/index.js packages/renderer/dist/index.js; do
+          for f in packages/*/dist/index.js; do
             raw=$(wc -c < "$f"); gz=$(gzip -c "$f" | wc -c)
             echo "- \`$f\`: ${raw} B (gzip ${gz} B)" >> "$GITHUB_STEP_SUMMARY"
           done

@@ -197,7 +197,7 @@ function update(patch: Record<string, unknown>, property?: string): void {
         />
       </label>
 
-      <div class="sfb-inline">
+      <div class="sfb-row">
         <label class="sfb-checkbox">
           <input
             type="checkbox"
@@ -208,7 +208,7 @@ function update(patch: Record<string, unknown>, property?: string): void {
           />
           {{ ui.required }}
         </label>
-        <label class="sfb-label sfb-label--inline">
+        <label class="sfb-row__item">
           {{ ui.width }}
           <input
             class="sfb-input sfb-input--short"
